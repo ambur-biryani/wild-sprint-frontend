@@ -1,0 +1,13 @@
+.profile-edit-btn{
+  border: none;
+  border-radius: 3px;
+  width: 9em;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #6c757d;
+  cursor: pointer;
+  float: right;
+  margin-top: -23%;  
+  margin-right:6%;
+  }

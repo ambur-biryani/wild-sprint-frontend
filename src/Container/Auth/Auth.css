@@ -1,0 +1,111 @@
+
+.logindark {
+    height: 100vh;
+    background: #475d62 url(sign-in.jpg);
+    background-size: cover;
+    position: relative;
+  }
+  
+  .logindark form {
+    width: 320px;
+
+    padding: 40px;
+    border-radius: 4px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.2);
+  }
+  
+  .logindark .illustration {
+    text-align: center;
+    padding: 15px 0 20px;
+    font-size: 15vh;
+    color: #2980ef;
+  }
+  
+  .logindark form .formcontrol {
+      margin-top: 1vh;
+      margin-bottom: 1vh;
+      background: none;
+      border: none;
+      border-bottom: 2px solid #434a52;
+      border-radius: 0;
+      box-shadow: none;
+      outline: none;
+      color: inherit;
+      font-size: 2vh;
+      width:80%;
+      color: black;
+  }
+  
+   .SignIn-button{
+    background-color: #ff872f;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 26px;
+    text-shadow: none;
+    color:white;
+    font-size: 120%;
+    font-weight: bolder;
+    outline: none;
+    width:80%;
+    margin-bottom: 1vh;
+  }
+  
+  .logindark form .SignIn-button:hover, .logindark form .SignIn-button:active {
+    background: #214a80;
+    outline: none;
+  }
+  
+  .logindark form .forgot {
+    display: block;
+    text-align: center;
+    font-size: 1.35vh;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+  .forgot-btn{
+
+    text-align: center;
+    font-size: 1.35vh;
+    color: #6f7a85;
+    opacity: 0.9;
+    text-decoration: none;
+    border-color: none;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+  }
+  .forgot-btn:hover{
+    color: #214a80;
+  }
+  
+  .logindark form .forgot:hover, .logindark form .forgot:active {
+    opacity: 1;
+    text-decoration: none;
+  }
+  
+  .logindark form .SignIn-button:active {
+    transform: translateY(1px);
+  }
+  
+.illustration-lock{
+    color: #ff872f;
+}
+.signin-form{
+    background-color: rgb(242,238,235);
+    color: rgb(39,39,40);
+}
+.SignIn-error{
+    color:red;
+}
+.SignUp-success{
+  color: green;
+}
