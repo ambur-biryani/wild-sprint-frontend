@@ -1,11 +1,12 @@
-
+import * as actions from '../../../store/Actions/Index';
 import React, { useEffect, useRef, useState } from 'react';
 import { DyteMeeting, Meeting , DyteErrors,Participant } from "dyte-client";
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector , useDispatch} from 'react-redux';
 import axios from 'axios';
 import { Component } from 'react';
 import logoPng from './logo.png';
 function DyteMeet() {
+    const dispatch = useDispatch()
     //const [roomDeet,setRoomDeet] = useState({});
     //const [roomName,setRoomName] = useState(null);
     const [participantId, setParticipantId] = useState(null);
@@ -18,6 +19,9 @@ function DyteMeet() {
             // take appropriate action
         }
     }
+    useEffect(()=>{
+        dispatch(actions.fetchOneEvent())
+    },[])
     function startMeeting(){
         const url = 'https://api.cluster.dyte.in/v1/organizations/f6677306-dddd-4341-b78e-00cb88899ad6/meeting';
 
@@ -30,7 +34,7 @@ function DyteMeet() {
         },
         body: JSON.stringify({authorization: {waitingRoom: false}, title: 'TestMeetingNew', presetName: 'newPreset'})
     };
-
+    
     axios(url, options).then(json => {
         console.log(json)
     })
@@ -40,7 +44,7 @@ function DyteMeet() {
         //let newMtgId = "98bfca4b-b2c6-456a-b13a-2c6eeb8ef6e7"
         //const url2 = 'https://api.cluster.dyte.in/v1/organizations/f6677306-dddd-4341-b78e-00cb88899ad6/meetings/'+json.data.data.meeting.id+'/participant';
         
-        if(roomId!==null){
+        if(roomId!==null && roomName !== null){
         const url2 = 'https://api.cluster.dyte.in/v1/organizations/f6677306-dddd-4341-b78e-00cb88899ad6/meetings/'+ roomId+'/participant';
         let clientId = Math.random().toString(36).substring(7);
         const options = {
@@ -57,7 +61,8 @@ function DyteMeet() {
           .then(res => res.json())
           .then(json => {
             console.log(json);
-            setParticipantId(json.data.authResponse.authToken)
+   
+            setParticipantId(json?.data?.authResponse?.authToken)
           })
     }},[roomId])
 /*    useEffect(() => {
@@ -129,7 +134,7 @@ if(roomName!==null && participantId !==null){
                                     header:true,
                                     dimensions:{
                                         width: "80vw",
-                                        height: "94vh"
+                                        height: "88vh"
                                     },
                                     headerElements: {
                                         clock: true,

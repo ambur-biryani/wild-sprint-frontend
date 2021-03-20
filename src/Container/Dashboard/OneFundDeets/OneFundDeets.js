@@ -1,5 +1,4 @@
 import * as actions from '../../../store/Actions/Index';
-import OneEvent from '../../../Components/oneEvent/oneEvent';
 import Spinner from '../../../Components/UI/Spinner/Spinner';
 import {Redirect} from 'react-router-dom';
 import Navbar from '../../../Components/Navbar/Navbar';
@@ -11,6 +10,7 @@ import dBank from '../../../abis/dBank.json'
 import Token from '../../../abis/Token.json'
 import Web3 from 'web3';
 import axios from 'axios';
+import './OneFundDeets.css'
 
 class OneFundDeets extends Component {
     state={
@@ -95,7 +95,9 @@ class OneFundDeets extends Component {
     //console.log(eventsArr.length,"THIS IS MAIN");
     let sidebar = <Sidebar role = {localStorage.getItem('role')}/>;
     let navbar =  <Navbar name ={localStorage.getItem('name')}/>;
-    
+    let viewButton =(
+        <button class="fund-view-btn" name="btnAddMore" value="DONATE!" href="/dyte" onClick={() => this.redirectViewHandler()}>VIEW LIVE STREAM</button>
+    )
     let oneEvent;
     let name = this.props.name;
     let scfName = this.props.scientificName;
@@ -111,14 +113,15 @@ class OneFundDeets extends Component {
             <table>        
                 <tr>
                     <td class="colm">
-                        <img src={image} alt="" class="fund-profilepic"/>
+                    <h5 class="titlename">Fundraiser Details </h5> 
+                        <img style={{width:"30vw"}} src={image} alt="" class="fund-profilepic"/>
                     </td> 
                     <td class="fund-colm">
-                        <h5 class="titlename">Fundraiser Details</h5>           
+                                  
                         
                     
                         <div class="details">     
-                            <table>
+                            <table class='eventTable'>
                                 <tr>
                                     <td><label>Event Name</label></td>
                                     <td><p>{name}</p></td>
@@ -150,12 +153,22 @@ class OneFundDeets extends Component {
                                 <tr>
                                     <td><label>Funds Remaining</label></td>
                                     <td><p id='id3'> </p></td>
-                                </tr>                          
-                            </table>                                 
-                        </div>                  
+                                </tr>  
+                                
+                                    
+                                                
+                            </table>    
+                                                       
+                        </div>    
+                                     
                     </td>   
+                   
                 </tr>
+                {viewButton}
             </table>
+            <div class="buttonDiv">
+            
+            </div>
         </div>
     </div>
         
@@ -170,12 +183,10 @@ class OneFundDeets extends Component {
         image = {image}
         />*/
     let DonateButton =(
-        <button class="fund-edit-btn" name="btnAddMore" value="DONATE!" href="/Donate" onClick={() => this.redirectHandler()}>DONATE</button>
+        <button class="fund-edi-btn" name="btnAddMore" value="DONATE!" href="/Donate" onClick={() => this.redirectHandler()}>DONATE</button>
     )
 
-    let viewButton =(
-        <button class="fund-edit-btn" name="btnAddMore" value="DONATE!" href="/dyte" onClick={() => this.redirectViewHandler()}>VIEW</button>
-    )
+    
    
     let TokenExpRedirect = null
     if (!localStorage.getItem('token')){
@@ -189,7 +200,7 @@ class OneFundDeets extends Component {
                 {DonateButton}
                 
                 {oneEvent}
-                {viewButton}
+                
                 {TokenExpRedirect}
                 
                 
