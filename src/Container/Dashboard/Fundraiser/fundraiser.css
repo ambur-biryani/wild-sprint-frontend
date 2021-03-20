@@ -1,0 +1,31 @@
+.yourFund{
+    float:left;
+    position: relative;
+    text-align: left;
+}
+.fund-pics{
+    text-align: left;
+}
+
+.button2{
+    float:right;
+    border-radius: 20px;
+    border:none;
+    background: linear-gradient(120deg, #ff872f 0%, #27ffbe 130%, #73faff 100%);
+    padding: 1.5em;
+    height:20px;
+    
+  }
+
+.button2 a{
+  font-size: 17px;
+  font-weight: 600;
+  font-family: 'Lato', Arial, sans-serif;
+  padding:20px;
+  color: #fff;
+  text-decoration: none;
+}
+.button2:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+
