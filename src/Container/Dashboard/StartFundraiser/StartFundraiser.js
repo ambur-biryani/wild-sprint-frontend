@@ -66,6 +66,9 @@ handleChange = (event) => {
         [event.target.name]: event.target.value
     })
 }
+RedirectBackHandler =() =>{
+  this.props.history.push('/fund');
+}
 
 onFileUpload = () => { 
   
@@ -236,7 +239,7 @@ onFileUpload = () => {
       
               <div className= "footer">
                 <div className='set'>
-                  <button className='back' href="/fund" >Back</button>
+                  <button className='back' onClick={this.RedirectBackHandler}href="/fund" >Back</button>
                   <button className='next' onClick={this.onFileUpload} >Next</button>
                 </div>
               </div>

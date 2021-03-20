@@ -2,16 +2,22 @@ import * as actions from '../../../store/Actions/Index';
 import React, { useEffect, useRef, useState } from 'react';
 import { DyteMeeting, Meeting , DyteErrors,Participant } from "dyte-client";
 import { connect, useSelector , useDispatch} from 'react-redux';
+import { Layout , Button} from 'antd';
+
+
 import axios from 'axios';
 import { Component } from 'react';
 import logoPng from './logo.png';
+const { Header, Footer, Sider, Content } = Layout;
 function DyteMeet() {
     const dispatch = useDispatch()
     //const [roomDeet,setRoomDeet] = useState({});
     //const [roomName,setRoomName] = useState(null);
     const [participantId, setParticipantId] = useState(null);
+    let oneEvent = useSelector(state=>state.oneEvent.events)
     let roomName = useSelector(state=>state.oneEvent.events.meetingName);
     let roomId = useSelector(state=>state.oneEvent.events.meetingId)
+    console.log('ONE EVENT: ',oneEvent);
     console.log('ROOM NAME:',roomName)
     const onError = (error) => {
         console.log('ERROR:',error)
@@ -109,6 +115,17 @@ fetch(url2, options)
   .catch(err => console.error('error:' + err));
     },[])*/
     let DyteComponent;
+    let imageUrl  = 'http://localhost:3001/'+oneEvent.image
+    let rightBar = (
+        <div>
+            <img src = {imageUrl} style={{width: "24vw" ,marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'2vh'}}/>
+            <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Fund Name:</strong> {oneEvent.name}</h3>
+            <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Species Name:</strong> {oneEvent.scfname}</h3>
+            <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Habitat:</strong> {oneEvent.habitat}</h3><br/><br/><br/>
+            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f", paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"left",marginLeft:"5vw"}} type="primary">Back</Button>
+            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f",paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"right",marginRight:"5vw"}}  type="primary">Donate</Button>
+        </div>
+    )
 if(roomName!==null && participantId !==null){
     console.log('ROOM NAME',roomName)
     //console.log('MEETING ID: ',roomDeet.id);
@@ -133,8 +150,9 @@ if(roomName!==null && participantId !==null){
                      uiConfig={{
                                     header:true,
                                     dimensions:{
-                                        width: "80vw",
-                                        height: "88vh"
+                                        width:"73.5vw"
+                          
+                        
                                     },
                                     headerElements: {
                                         clock: true,
@@ -155,9 +173,17 @@ if(roomName!==null && participantId !==null){
     )
 }
     return (
-        <div className="App">
-            {DyteComponent}
-        </div>
+   
+      
+   
+      <Layout>
+        <Content>{DyteComponent}</Content>
+        <Sider width="26.5vw">{rightBar}</Sider>
+      </Layout>
+
+   
+            
+
         );
 }
 
