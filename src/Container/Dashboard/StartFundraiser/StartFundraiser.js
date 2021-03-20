@@ -22,20 +22,44 @@ class startFundraiser extends Component{
         habitat:null,
         description:null,
         status:'EX',
-        selectedFile: null      
+        selectedFile: null ,
+        meetingName: null,
+        meetingId: null,     
 }
  onFileChange = (event)=> { 
   
         // Update the state 
-        this.setState({ selectedFile: event.target.files[0] }); 
+        this.setState({ ...this.state, selectedFile: event.target.files[0] }); 
         
         }; 
+
+  startMeeting= ()=>{
+          const url = 'https://api.cluster.dyte.in/v1/organizations/f6677306-dddd-4341-b78e-00cb88899ad6/meeting';
+  
+          const options = {
+          method: 'POST',
+          headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: 'b164c6e6cd0562c38a5f'
+          },
+          body: JSON.stringify({authorization: {waitingRoom: false}, title: 'TestMeetingNew', presetName: 'newPreset'})
+      };
+  
+      axios(url, options).then(json => {
+          console.log(json)
+          this.setState({ ...this.state, 
+            meetingName: json.data.data.meeting.roomName,
+            meetingId: json.data.data.meeting.id,
+          });
+      })
+      }
 
 componentDidMount () {
     
     let token = localStorage.getItem('token')
     let userId = localStorage.getItem('userId')
-    
+    this.startMeeting()
 };
 handleChange = (event) => {
     this.setState({
@@ -69,6 +93,8 @@ onFileUpload = () => {
     formData.append("habitat",habitat);
     formData.append("description",description);
     formData.append("status",status);
+    formData.append("meetingName",this.state.meetingName)
+    formData.append("meetingId",this.state.meetingId)
     formData.append( 
         "image", 
         this.state.selectedFile, 

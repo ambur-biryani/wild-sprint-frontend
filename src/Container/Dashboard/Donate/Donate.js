@@ -17,67 +17,100 @@ import Web3 from 'web3';
 
 class EventDonate extends Component{
     state={
-        amount:null
+        amount:null,
+        fullAmt:null,
     }
+
     async componentDidMount () {
         await this.loadBlockchainData(this.props.dispatch)
         let token = localStorage.getItem('token')
         let userId = localStorage.getItem('userId')
 
     };
+    
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     };
+    
     async loadBlockchainData(dispatch) {
-        if(typeof window.ethereum!=='undefined'){
-          const web3 = new Web3(window.ethereum)
-          const netId = await web3.eth.net.getId()
-          await window.ethereum.enable()
-          const accounts = await web3.eth.getAccounts()
-    
-          //load balance
-          if(typeof accounts[0] !=='undefined'){
-            const balance = await web3.eth.getBalance(accounts[0])        
-            const dbank = new web3.eth.Contract(dBank.abi, dBank.networks[netId].address);
-            setInterval(function(){
-              dbank.methods.displayAmt().call().then( function (result) {
-              //setInterval(function(){ window.location.reload(); }, 10000);
-              //document.getElementById("id").innerHTML= web3.utils.fromWei(result);
-            })}, 1000);
+      if(typeof window.ethereum!=='undefined'){
+        const web3 = new Web3(window.ethereum)
+        const netId = await web3.eth.net.getId()
+  
+        await window.ethereum.enable();
+  
+        const accounts = await web3.eth.getAccounts()
+  
+        //load balance
+        
+        if(typeof accounts[0] !=='undefined' ){
+          const balance = await web3.eth.getBalance(accounts[0]) 
+        
+          const dbank = new web3.eth.Contract(dBank.abi, dBank.networks[netId].address);
+          
+          setInterval(function(){
+  
+            dbank.methods.displayTotalAmt().call().then( function (result) {
+              console.log('THIS IS ID 1:', web3.utils.fromWei(result))
+              
+                //document.getElementById("id1").innerHTML= web3.utils.fromWei(result);
+                //BankAmt = web3.utils.fromWei(result)
+               
+          });
+  
            
-            this.setState({account: accounts[0], balance: balance, web3: web3})
-          } else {
-            window.alert('Please login with MetaMask')
-          }
-    
-          //load contracts
-          try {
-            const token = new web3.eth.Contract(Token.abi, Token.networks[netId].address)
-            const dbank = new web3.eth.Contract(dBank.abi, dBank.networks[netId].address)
-            const dBankAddress = dBank.networks[netId].address
-            this.setState({token: token, dbank: dbank, dBankAddress: dBankAddress})
-          } catch (e) {
-            console.log('Error', e)
-            window.alert('Contracts not deployed to the current network')
-          }
-    
+  
+            
+  
+        }, 1000);
+         
+          this.setState({account0: accounts[0],account1: accounts[1], balance: balance, web3: web3})
         } else {
-          window.alert('Please install MetaMask')
+          window.alert('Please login with MetaMask')
+        }
+  
+        //load contracts
+        try {
+          const token = new web3.eth.Contract(Token.abi, Token.networks[netId].address)
+          const dbank = new web3.eth.Contract(dBank.abi, dBank.networks[netId].address)
+          const dBankAddress = dBank.networks[netId].address
+          this.setState({token: token, dbank: dbank, dBankAddress: dBankAddress})
+        } catch (e) {
+          console.log('Error', e)
+          window.alert('Contracts not deployed to the current network')
+        }
+  
+      } else {
+        window.alert('Please install MetaMask')
+      }
+    }
+  
+    async deposit(amount) {
+      if(this.state.dbank!=='undefined'){
+        try{
+          await this.state.dbank.methods.deposit().send({value: amount.toString(), from: this.state.account0})
+        } catch (e) {
+          console.log('Error, deposit: ', e)
         }
       }
-    
-      async deposit(amount) {
-        if(this.state.dbank!=='undefined'){
-          try{
-            await this.state.dbank.methods.deposit().send({value: amount.toString(), from: this.state.account})
-          } catch (e) {
-            console.log('Error, deposit: ', e)
-          }
-        }
+    }
+  
+
+  
+    constructor(props) {
+      super(props)
+      this.state = {
+        web3: 'undefined',
+        account0: '',
+        account1: '',
+        token: null,
+        dbank: null,
+        balance: 0,
+        dBankAddress: null
       }
-    
+    }
     onFileUpload = () => {
         const formData = new FormData(); 
         let token = localStorage.getItem('token')
@@ -104,18 +137,7 @@ class EventDonate extends Component{
         )
     }
      }
-     constructor(props) {
-        super(props)
-        this.state = {
-          web3: 'undefined',
-          account: '',
-          token: null,
-          dbank: null,
-          balance: 0,
-          dBankAddress: null
-        }
-      }
-
+     
     render(){
         let fundId = localStorage.getItem('eventId')
         let DonateForm;
@@ -147,10 +169,12 @@ class EventDonate extends Component{
                             <p><strong>{fundId }</strong></p>
                         </div>
                     </div>
+             
+                    
                     <div className='set'>
                         <div className='pets-breed'>
                             <label for='pets-breed'>Account ID</label>
-                            <p><strong>{this.state.account}</strong></p>
+                            <p><strong>{this.state.account0}</strong></p>
                         </div>
                     </div>
                 </div>
