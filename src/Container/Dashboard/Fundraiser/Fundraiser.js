@@ -70,6 +70,8 @@ class Myfunds extends Component {
     </Button>
     )
        
+
+    
         return(
             <div className="myfunds">
                 {navbar}
