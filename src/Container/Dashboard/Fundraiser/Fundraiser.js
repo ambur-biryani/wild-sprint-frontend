@@ -64,6 +64,11 @@ class Myfunds extends Component {
         START FUNDRAISER
     </Button>
     )
+    let buttonWithdraw =(
+        <Button href="/withdraw" type="primary" block>
+        WITHDRAW FUNDS
+    </Button>
+    )
        
         return(
             <div className="myfunds">
@@ -73,7 +78,7 @@ class Myfunds extends Component {
                 <div class="fund-pics row">
                 
                 <h2 className="yourFund">YOUR FUNDRAISERS</h2>
-                {buttonStartFundraiser}<br/><br/><br/><br/>
+                {buttonStartFundraiser}<br/><br/>{buttonWithdraw}<br/><br/><br/><br/>
                 <div className="row">{events}</div>
                 {TokenExpRedirect}
                 </div>
