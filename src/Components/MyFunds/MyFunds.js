@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import classes from "../Events/Event.css";
 import { Card } from "antd";
+import "./MyFunds.css"
 
 const { Meta } = Card;
 
@@ -14,7 +15,7 @@ const myFunds = (props) => {
   console.log(imageUrl);
   return (
 
-    <div className="col-md-3  col-lg-4 col-xl-3">
+    <div className="card-fund-img col-md-3  col-lg-4 col-xl-3">
       <Card
         hoverable
         style={{ width: 240 }}
