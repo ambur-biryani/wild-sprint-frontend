@@ -1,22 +1,34 @@
-import { render } from '@testing-library/react';
-import React from 'react';
-import classes from '../Events/Event.css'
+import { render } from "@testing-library/react";
+import React from "react";
+import classes from "../Events/Event.css";
+import { Card } from "antd";
 
-const myFunds=(props) =>{
-    let name=  props.name;
-    let image=  props.image;
-    let imageUrl= 'http://localhost:3001/'+image;
+const { Meta } = Card;
 
-    return (
-        <div className="col-md-6 col-lg-4 col-xl-3">
-        <figure className="snip1527">
-          <div className="image"><img src={imageUrl} /></div>
-          <figcaption>
-            <h3>{name}</h3>
-          </figcaption>
-          <a ></a>
-        </figure>
-      </div>
-    )}
+const myFunds = (props) => {
+  let name = props.name;
+  let image = props.image;
+  let scfname =  props.scfname;
+  let imageUrl = "http://localhost:3001/" + image;
+
+  console.log(imageUrl);
+  return (
+
+    <div className="col-md-3  col-lg-4 col-xl-3">
+      <Card
+        hoverable
+        style={{ width: 240 }}
+        cover={
+          <img
+            alt="example"
+            src={imageUrl}
+          />
+        }
+      >
+        <Meta title={scfname} description={name}/>
+      </Card>
+    </div>
+  );
+};
 
 export default myFunds;

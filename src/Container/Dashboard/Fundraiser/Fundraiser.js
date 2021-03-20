@@ -9,6 +9,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './fundraiser.css';
 import FormData from 'form-data'; 
+import { Button } from 'antd';
 
 class Myfunds extends Component {
     state={
@@ -49,6 +50,7 @@ class Myfunds extends Component {
         <MyFund
          name={event.name}
          image={event.image}
+         scfname={event.scfname}
            />
         ))
     }
@@ -58,9 +60,9 @@ class Myfunds extends Component {
     }
 
     let buttonStartFundraiser =(
-        <button className="button2">
-            <a href="/StartFundForm">START FUNDRAISER!</a>
-        </button>
+        <Button href="/StartFundForm" type="primary" block>
+        START FUNDRAISER
+    </Button>
     )
        
         return(
@@ -72,7 +74,7 @@ class Myfunds extends Component {
                 
                 <h2 className="yourFund">YOUR FUNDRAISERS</h2>
                 {buttonStartFundraiser}<br/><br/><br/><br/>
-                <div>{events}</div>
+                <div className="row">{events}</div>
                 {TokenExpRedirect}
                 </div>
                 
