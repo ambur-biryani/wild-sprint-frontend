@@ -11,6 +11,7 @@ import { Tabs, Tab } from 'react-bootstrap'
 import dBank from '../../../abis/dBank.json'
 import Token from '../../../abis/Token.json'
 import Web3 from 'web3';
+import logoPng from './logo.png'
 class WithdrawPage extends Component {
     
     async componentWillMount() {
@@ -121,7 +122,9 @@ class WithdrawPage extends Component {
         <div class="emp-profile">
             <table>        
                 <tr>
-                    
+                <td class="colm">
+                    <img src={logoPng} alt="" class="profilepic"/>
+                </td> 
                     <td class="fund-colm">
                         <h5 class="titlename">Withdrawal Page</h5>           
                         
@@ -130,7 +133,7 @@ class WithdrawPage extends Component {
                             <table>
                                 <tr>
                                     <td><label>Account Number</label></td>
-                                    <td><p > {this.state.account}</p></td>
+                                    <td><p > {this.state.account0}</p></td>
                                 </tr>
                                 <tr>
                                     <td><label>Account Funds</label></td>

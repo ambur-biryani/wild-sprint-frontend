@@ -3,14 +3,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import { DyteMeeting, Meeting , DyteErrors,Participant } from "dyte-client";
 import { connect, useSelector , useDispatch} from 'react-redux';
 import { Layout , Button} from 'antd';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { Component } from 'react';
 import logoPng from './logo.png';
 const { Header, Footer, Sider, Content } = Layout;
 function DyteMeet() {
     const dispatch = useDispatch()
+    const history = useHistory();
     //const [roomDeet,setRoomDeet] = useState({});
     //const [roomName,setRoomName] = useState(null);
     const [participantId, setParticipantId] = useState(null);
@@ -114,6 +116,14 @@ fetch(url2, options)
 })
   .catch(err => console.error('error:' + err));
     },[])*/
+    const redirectBackHandle = ()=>{
+        history.push('/onefund');
+
+    }
+    const redirectDonateHandle = ()=>{
+        history.push('/donate');
+
+    }
     let DyteComponent;
     let imageUrl  = 'http://localhost:3001/'+oneEvent.image
     let rightBar = (
@@ -122,8 +132,8 @@ fetch(url2, options)
             <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Fund Name:</strong> {oneEvent.name}</h3>
             <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Species Name:</strong> {oneEvent.scfname}</h3>
             <h3 style={{fontSize:"1.5vw",color: "white", marginLeft:"1.25vw",marginRight:"1.25vw",marginTop:'3vh'}}><strong>Habitat:</strong> {oneEvent.habitat}</h3><br/><br/><br/>
-            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f", paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"left",marginLeft:"5vw"}} type="primary">Back</Button>
-            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f",paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"right",marginRight:"5vw"}}  type="primary">Donate</Button>
+            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f", paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"left",marginLeft:"5vw"}} onClick={redirectBackHandle}type="primary">Back</Button>
+            <Button style={{borderRadius:"15px",fontSize:"1.5vw",backgroundColor:"#ff872f",borderColor:"#ff872f",paddingBottom:"10px",paddingTop:"10px",height:"6vh",width:"6.25vw",float:"right",marginRight:"5vw"}}  onClick={redirectDonateHandle} type="primary">Donate</Button>
         </div>
     )
 if(roomName!==null && participantId !==null){
