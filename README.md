@@ -1,5 +1,7 @@
 # Wild Sprint
 
+*This project won first place in the tracks of industrial collaborations with Ethereum and with Dyte in the DevSpace '21 Hackathon by The Computer Society of India - VIT*
+
 ## What is it?
 
 A user-friendly web application for wildlife preservation organisations to obtain funds in a secure, safe and easily trackable manner. By integrating Dyte SDK into the platform, the fundraising organisations can directly live-stream videos from the preservation site via a special account. Ethereum smart contracts facilitate donations to the organisations by any regular user who could look at the livestreams before opting to donate.
