@@ -1,6 +1,6 @@
 # Wild Sprint
 
-*This project won first place in the tracks of industrial collaborations with Ethereum and with Dyte in the DevSpace '21 Hackathon by The Computer Society of India - VIT*
+*This project won first place in the tracks of industrial collaborations with Ethereum and Dyte in the DevSpace '21 Hackathon by The Computer Society of India - VIT*
 
 ## What is it?
 
